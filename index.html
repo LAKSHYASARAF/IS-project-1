@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>File Integrity Checker — SHA-256 (Local Baselines)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- our styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="app-header">
+      <h1>🔒 File Integrity Checker</h1>
+      <p class="sub">Compute SHA-256, save a baseline locally, and verify later — no server, fully offline.</p>
+    </header>
+
+    <!-- Section A: Register / Save Baseline -->
+    <section class="card">
+      <h2>① Register Baseline (Hash & Save)</h2>
+      <p class="hint">Pick a file you trust right now. We’ll compute its SHA-256 and store it in your browser (localStorage).</p>
+
+      <div class="field">
+        <label for="regFile">Choose file</label>
+        <input id="regFile" type="file" />
+      </div>
+
+      <div class="row">
+        <button id="btnHashSave" class="btn">Hash & Save Baseline</button>
+        <button id="btnClearReg" class="btn ghost">Clear Selection</button>
+      </div>
+
+      <div id="regResult" class="result"></div>
+    </section>
+
+    <!-- Section B: Verify Against Saved Baselines -->
+    <section class="card">
+      <h2>② Verify File</h2>
+      <p class="hint">Pick a file to check. We’ll hash it and compare with all saved baselines.</p>
+
+      <div class="field">
+        <label for="verFile">Choose file</label>
+        <input id="verFile" type="file" />
+      </div>
+
+      <div class="row">
+        <button id="btnVerify" class="btn">Verify Now</button>
+        <button id="btnClearVer" class="btn ghost">Clear Selection</button>
+      </div>
+
+      <div id="verResult" class="result"></div>
+    </section>
+
+    <!-- Section C: Saved Baselines (Local) -->
+    <section class="card">
+      <div class="row space-between">
+        <h2>③ Saved Baselines</h2>
+        <div class="row">
+          <button id="btnExport" class="btn secondary">Export JSON</button>
+          <button id="btnClearAll" class="btn danger">Delete All</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="recordsTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Filename</th>
+              <th>Size</th>
+              <th>Saved On</th>
+              <th>SHA-256 (click to copy)</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="recordsBody">
+            <!-- filled by JS -->
+          </tbody>
+        </table>
+      </div>
+      <p class="hint small">Baselines live only in your browser (localStorage). Clearing site data will remove them.</p>
+    </section>
+
+    <footer class="footer">
+      <span>Made with ❤️ using Web Crypto API (SHA-256)</span>
+      <span class="muted">Tip: identical files → identical hashes; even 1-bit change → totally different hash.</span>
+    </footer>
+  </div>
+
+  <!-- our script -->
+  <script src="main.js"></script>
+</body>
+</html>
